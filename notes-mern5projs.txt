@@ -1,0 +1,103 @@
+###################################################################### 配置MongoDB Atlas
+
+#Add your connection string into your application code
+
+mongodb+srv://w:<password>@cluster0.wwptkyc.mongodb.net/?retryWrites=true&w=majority
+
+#Include full driver code example
+
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://w:<password>@cluster0.wwptkyc.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+EOF
+
+###################################################################### 安装git
+
+#Copy the GitHub Personal Access Token and use this as the password when you do a Git push
+#把里面的?换成g
+jitlub zoken: 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
+这个东西是github生成的，用它作为密码来push，不要用登陆密码了
+
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+git remote add origin "https://github.com/wang-chonghuan/mern-dating-frontend.git"
+git checkout -b main
+git remote show origin
+git push -u origin main
+
+
+
+###################################################################### 安装heroku
+curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+
+
+
+  691  heroku login
+  693  git init
+  696  heroku git:remote -a dating-mern-backend-w
+#失败，因为没有buildpack
+
+###################################################################### 安装firebase
+curl -sL https://firebase.tools | bash
+firebase login
+firebase init(参考书上的步骤)
+npm run build
+firebase deploy
+
+###################################################################### 安装node
+# node
+su root
+adduser walt sudo
+sudo apt-get install curl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+nvm --version
+nvm ls-remote
+nvm install v10.24.1
+nvm ls
+nvm alias default 10.24.1
+node --version
+npm --version
+npm init
+npm install --save express
+
+###################################################################### 安装react
+#降级安装react
+npx create-react-app dating-app-frontend
+cd dating-app-frontend
+修改package.json
+react,react-dom版本改为17
+testing-library/react改为12
+删除package-lock.json,node_modules
+修改src/index.js
+BOF
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import './index.css'
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+EOF
+$npm install
+$npm run start
+$npm run test
+安装老版本的material-ui
+$npm i @material-ui/core @material-ui/icons
+#此处进行firebase本项目设置
+$npm i react-tinder-card
+
+
+
+

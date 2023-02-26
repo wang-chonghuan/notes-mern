@@ -1,0 +1,43 @@
+openai-key:
+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
+
+################################################安装mongodb4.4
+
+注意mongodb 5和6在vbox上无法安装，因为指令集，只能用4.4
+
+sudo apt-get install gnupg
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org=4.4.18 mongodb-org-server=4.4.18 mongodb-org-shell=4.4.18 mongodb-org-mongos=4.4.18 mongodb-org-tools=4.4.18
+echo "mongodb-org hold" | sudo dpkg --set-selections
+echo "mongodb-org-server hold" | sudo dpkg --set-selections
+echo "mongodb-org-shell hold" | sudo dpkg --set-selections
+echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
+echo "mongodb-org-tools hold" | sudo dpkg --set-selections
+
+###############################启动
+
+sudo systemctl daemon-reload
+sudo systemctl start mongod
+sudo systemctl status mongod
+sudo systemctl enable mongod
+sudo systemctl stop mongod
+sudo systemctl restart mongod
+mongo
+
+###############################卸载
+
+sudo service mongod stop
+sudo apt-get purge mongodb-org*
+sudo rm -r /var/log/mongodb
+sudo rm -r /var/lib/mongodb
+############################### IP绑定
+https://www.mongodb.com/docs/v4.4/tutorial/install-mongodb-on-ubuntu/
+
+###############################运维
+sudo systemctl start mongod
+proj/server/yarn start
+proj/server/yarn dev
+git log
+git diff HEAD~1
